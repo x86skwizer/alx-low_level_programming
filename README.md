@@ -13,4 +13,4 @@ The repository is organized into several subdirectories, each containing code fo
 - **0x04-more_functions_nested_loops**: This directory contains code for programs that use more advanced functions and nested loops.
 - **0x05-pointers_arrays_strings**: This directory contains code for programs that use pointers, arrays, and strings.
 - **0x06-pointers_arrays_strings**: This directory contains code for more advanced programs that use pointers, arrays, and strings.
-- *0x07-pointers_arrays_strings*: This directory contains code for even more advanced programs that use pointers, arrays, and strings.
+- ***0x07-pointers_arrays_strings***: This directory contains code for even more advanced programs that use pointers, arrays, and strings.
