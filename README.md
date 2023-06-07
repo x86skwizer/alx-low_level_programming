@@ -1,4 +1,4 @@
-# ALX School Low-Level Programming
+# ALX Low-Level Programming
 This repository contains a collection of projects for ALX School's low-level programming curriculum. The projects are designed to challenge students and help them develop a deep understanding of computer architecture and operating systems, as well as a strong grasp of C programming concepts such as pointers, memory management, and data structures.
 
 ## Getting Started
