@@ -1,20 +1,18 @@
 #include "main.h"
 
 /**
- * _strlen - returns lenght of string
+ * _strlen_recursion - returns the length of a string
  * @s: string
  *
- * Return: lenght of string
+ * Return: length of a string
  */
-int _strlen(char *s)
+int _strlen_recursion(char *s)
 {
 	int i;
 
-	if (!s)
-		return (0);
 	i = 0;
-	while (s[i])
-		i++;
+	if (s && *s)
+		i += 1 + _strlen_recursion(s + 1);
 	return (i);
 }
 
@@ -46,7 +44,7 @@ int is_palindrome(char *s)
 	int len;
 	int pal;
 
-	len = _strlen(s);
+	len = _strlen_recursion(s);
 	if (len == 0 || len == 1)
 		return (1);
 	pal = boucle_pal(s, len, 0);
