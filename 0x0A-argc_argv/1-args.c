@@ -8,7 +8,6 @@ void putnbr(int n)
 {
 	char c;
 
-
 	if (n / 10)
 		putnbr(n / 10);
 	c = n % 10 + 48;
