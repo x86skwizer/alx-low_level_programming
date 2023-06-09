@@ -5,7 +5,6 @@ This project is designed to help you understand how to use command line argument
 ## In this project, you will learn how to:
 
 - Use `argc` and `argv` to pass arguments to your program
-- Parse command line arguments using `getopt`
 - Handle errors and invalid input
 
 ## Getting Started
