@@ -34,7 +34,10 @@ int main(int ac, char **av)
 	int n;
 
 	if (ac == 1)
-		return (printf("0\n"));
+	{
+		printf("0\n");
+		return (0);
+	}
 	i = 1;
 	while (av[i])
 	{
