@@ -20,7 +20,7 @@ To use this project, follow these steps:
 Clone the repository using the following command:
 
 ```
-git clone https://github.com/<username>/holbertonschool-low_level_programming.git
+git clone https://github.com/x86skwizer/alx-low_level_programming.git
 ```
 
 ### Step 2: Navigate to the project directory
@@ -28,7 +28,7 @@ git clone https://github.com/<username>/holbertonschool-low_level_programming.gi
 Navigate to the project directory:
 
 ```
-cd holbertonschool-low_level_programming/0x09-static_libraries
+cd alx-low_level_programming/0x09-static_libraries
 ```
 
 ### Step 3: Compile the static library
@@ -54,7 +54,7 @@ The project is divided into the following tasks:
 
 ### Task 0: A library is not a luxury but one of the necessities of life
 
-Create a static library called `libholberton.a` containing the following functions:
+Create a static library called `libmy.a` containing the following functions:
 
 * `_putchar`
 * `_islower`
@@ -83,7 +83,7 @@ Write a script called `create_static_lib.sh` that creates a static library calle
 
 The repository contains the following files:
 
-### libholberton.a
+### libmy.a
 
 A static library containing the functions listed in Task 0.
 
@@ -93,8 +93,8 @@ A shell script that creates a static library called `liball.a` from all the `.c`
 
 ### holberton.h
 
-A header file containing the prototypes of all the functions in `libholberton.a`.
+A header file containing the prototypes of all the functions in `libmy.a`.
 
 ### *.c
 
-Several C files containing the implementations of the functions in `libholberton.a`.
+Several C files containing the implementations of the functions in `libmy.a`.
