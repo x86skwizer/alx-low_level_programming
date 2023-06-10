@@ -12,11 +12,11 @@ void putnbr(int n)
 	if (n < 0)
 	{
 		write(STDOUT_FILENO, "-", 1);
-		putnbr(n * (-1));
+		n *= -1;
 	}
 	if (n / 10)
 		putnbr(n / 10);
-	c = n % 10 + 48;
+	c = (n % 10) + 48;
 	write(STDOUT_FILENO, &c, 1);
 }
 
