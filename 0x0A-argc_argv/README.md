@@ -18,6 +18,7 @@ To get started, you should have a basic understanding of C programming and how t
 - `2-args.c`: A program that prints the number of arguments passed to it
 - `3-mul.c`: A program that multiplies two numbers passed as arguments
 - `4-add.c`: A program that adds positive numbers passed as arguments
+- `100-change.c`: A program that prints the minimum number of coins to make change for an amount of money
 
 ## To compile the programs, use the following command:
 
@@ -26,4 +27,3 @@ gcc -Wall -Werror -Wextra -pedantic <filename.c> -o <output>
 ```
 
 Replace `<filename.c>` with the name of the file you want to compile and `<output>` with the name of the output file.
-
