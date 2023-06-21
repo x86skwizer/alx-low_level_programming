@@ -36,7 +36,7 @@ To compile and run the files in this project, you need:
 1. Clone this repository to your local machine using the following command:
 
    ```
-   git clone https://github.com/your_username/0x0E-structures_typedef.git
+   git clone https://github.com/x86skwizer/0x0E-structures_typedef.git
    ```
 
 2. Navigate to the project directory:
