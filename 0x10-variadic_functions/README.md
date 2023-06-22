@@ -48,4 +48,4 @@ The code in this repository is written in C and complies with the C90 standard. 
 
 ## Author
 
-This repository is maintained by [ALX](https://github.com/alx).
+This repository is maintained by [x86skwizer](https://github.com/x86skwizer).
