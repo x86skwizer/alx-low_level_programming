@@ -1,29 +1,46 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 /**
- * print_binary - Prints binary of number
- * @n: number
+ * _power - calculate (base and power)
+ * @base: base
+ * @pow: power
+ * Return: value of base and power
  */
-
-void print_binary(unsigned long int n)
-
+unsigned long int _power(unsigned int base, unsigned int pow)
 {
-	char i;
+	unsigned long int num;
+	unsigned int i;
 
-	if (n == 0)
+	num = 1;
+	for (i = 1; i <= pow; i++)
+		num *= base;
+	return (num);
+}
+
+/**
+ * print_binary - prints the binary representation of a number
+ * @n: num of prented
+ */
+void print_binary(unsigned long int n)
+{
+	unsigned long int dev, result;
+	char flag;
+
+	flag = 0;
+	dev = _power(2, sizeof(unsigned long int) * 8 - 1);
+
+	while (dev != 0)
 	{
-		write(1, "0", 1);
-		return;
+		result = n & dev;
+		if (result == dev)
+		{
+			flag = 1;
+			write(1, "1", 1);
+
+		}
+		else if (flag == 1 || dev == 1)
+			write(1, "0", 1);
+		dev >>= 1;
 	}
-	if (n == 1)
-	{
-		write(1, "1", 1);
-		return;
-	}
-	print_binary(n >> 1);
-	i = (n & 1) ? '1' : '0';
-	write(1, &i, 1);
 }
