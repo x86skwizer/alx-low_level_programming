@@ -11,6 +11,8 @@ shash_table_t *shash_table_create(unsigned long int size)
 	shash_table_t *table;
 	unsigned long int i;
 
+	if (!size)
+		return (NULL);
 	table = malloc(sizeof(shash_table_t));
 	if (!table)
 		return (NULL);
@@ -213,8 +215,8 @@ void shash_table_delete(shash_table_t *ht)
 	while (current != NULL)
 	{
 		tmp = current->snext;
-		free(tmp->key);
-		free(tmp->value);
+		free(current->key);
+		free(current->value);
 		free(current);
 		current = tmp;
 	}
