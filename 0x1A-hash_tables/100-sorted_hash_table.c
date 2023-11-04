@@ -143,6 +143,8 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	if (!ht || !key || !*key)
 		return (NULL);
 	index = key_index((const unsigned char *)key, ht->size);
+	if (index > ht->size - 1)
+		return (NULL);
 	tmp = ht->shead;
 	while (tmp)
 	{
