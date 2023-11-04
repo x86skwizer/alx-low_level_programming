@@ -93,6 +93,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	if (!ht || !key || !*key || !value)
 		return (0);
 	index = key_index((const unsigned char *)key, ht->size);
+	if (index >= ht->size)
+		return (0);
 	tmp = ht->shead;
 	while (tmp)
 	{
@@ -104,7 +106,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 				return (0);
 			return (1);
 		}
-		tmp = tmp->next;
+		tmp = tmp->snext;
 	}
 	node = malloc(sizeof(shash_node_t));
 	if (!node)
