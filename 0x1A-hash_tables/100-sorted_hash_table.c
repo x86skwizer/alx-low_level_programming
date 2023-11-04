@@ -138,11 +138,14 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	index = key_index((const unsigned char *)key, ht->size);
 	if (index >= ht->size)
 		return (NULL);
-	for (tmp = ht->shead; tmp && strcmp(tmp->key, key); tmp = tmp->snext)
-		;
-	if (!tmp)
-		return (NULL);
-	return (tmp->value);
+	tmp = ht->shead;
+	while (tmp)
+	{
+		if (strcmp(tmp->key, key) == 0)
+			return (tmp->value);
+		tmp = tmp->snext;
+	}
+	return (NULL);
 }
 
 /**
