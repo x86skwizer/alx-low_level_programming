@@ -59,22 +59,13 @@ void set_sort(shash_table_t *ht, shash_node_t *node, const char *key)
 		tmp = ht->shead;
 		while (tmp->snext != NULL && strcmp(tmp->snext->key, key) < 0)
 			tmp = tmp->snext;
-		if (strcmp(tmp->key, key) > 0)
-		{
-			node->sprev = tmp->sprev;
-			node->snext = tmp;
-			tmp->sprev = node;
-		}
+		node->sprev = tmp;
+		node->snext = tmp->snext;
+		if (!tmp->snext)
+			ht->stail = node;
 		else
-		{
-			node->sprev = tmp;
-			node->snext = tmp->snext;
-			if (!tmp->snext)
-				ht->stail = node;
-			else
-				tmp->snext->sprev = node;
-			tmp->snext = node;
-		}
+			tmp->snext->sprev = node;
+		tmp->snext = node;
 	}
 
 }
@@ -95,10 +86,11 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	if (!ht || !key || !*key || !value)
 		return (0);
 	index = key_index((const unsigned char *)key, ht->size);
-	tmp = ht->array[index];
-	while (tmp)
+	if (index >= ht->size)
+		return (0);
+	for (tmp = ht->shead; tmp; tmp = tmp->snext)
 	{
-		if (strcmp(tmp->key, key) == 0)
+		if (!strcmp(tmp->key, key))
 		{
 			free(tmp->value);
 			tmp->value = strdup(value);
@@ -106,7 +98,6 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 				return (0);
 			return (1);
 		}
-		tmp = tmp->next;
 	}
 	node = malloc(sizeof(shash_node_t));
 	if (!node)
