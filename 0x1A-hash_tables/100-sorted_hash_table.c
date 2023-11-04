@@ -104,7 +104,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 				return (0);
 			return (1);
 		}
-		tmp = tmp->snext;
+		tmp = tmp->next;
 	}
 	node = malloc(sizeof(shash_node_t));
 	if (!node)
