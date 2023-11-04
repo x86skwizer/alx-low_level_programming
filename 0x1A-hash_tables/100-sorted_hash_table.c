@@ -31,57 +31,57 @@ shash_table_t *shash_table_create(unsigned long int size)
 }
 
 /**
- * continue_table_set - function for continue shash_table_set process
+ * set_sort - print sorted linked list
  * @ht: hash table
- * @new: new node
+ * @node: node
  * @key: key
- * Return: 1 or 0.
  */
-int continue_table_set(shash_table_t *ht, shash_node_t *new, const char *key)
+void set_sort(shash_table_t *ht, shash_node_t *node, const char *key)
 {
 	shash_node_t *tmp;
 
-	if (!ht->shead)
+	if (ht->shead == NULL)
 	{
-		new->sprev = NULL;
-		new->snext = NULL;
-		ht->stail = new;
-		ht->shead = new;
-		return (1);
+		ht->shead = node;
+		node->sprev = NULL;
+		node->snext = NULL;
+		ht->stail = node;
 	}
-	if (strcmp(key, ht->shead->key) < 0)
+	else if (strcmp(ht->shead->key, key) > 0)
 	{
-		new->sprev = NULL;
-		new->snext = ht->shead;
-		ht->shead->sprev = new;
-		ht->shead = new;
-		return (1);
+		node->sprev = NULL;
+		node->snext = ht->shead;
+		ht->shead->sprev = node;
+		ht->shead = node;
 	}
-	for (tmp = ht->shead; tmp->snext && strcmp(tmp->snext->key, key) < 0;
-			tmp = tmp->snext)
-		;
-	new->sprev = tmp;
-	new->snext = tmp->snext;
-	if (!tmp->snext)
-		ht->stail = new;
 	else
-		tmp->snext->sprev = new;
-	tmp->snext = new;
-	return (1);
+	{
+		tmp = ht->shead;
+		while (tmp->snext != NULL && strcmp(tmp->snext->key, key) < 0)
+			tmp = tmp->snext;
+		node->sprev = tmp;
+		node->snext = tmp->snext;
+		if (!tmp->snext)
+			ht->stail = node;
+		else
+			tmp->snext->sprev = node;
+		tmp->snext = node;
+	}
+
 }
 
 /**
- * shash_table_set - adds an element to the hash table.
- * @ht: is the hash table you want to add or update the key/value to.
- * @key: is the key. key can not be an empty string.
- * @value: is the value associated with the key.
+ * shash_table_set - function that adds element to hash table
+ * @ht: hash table you want to add or update the key/value to
+ * @key: key to look for in hash table
+ * @value: value associated with the key
  *
- * Return: 1 if it succeeded, 0 otherwise.
+ * Return: 1 if it succeeded, 0 otherwise
  */
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
+	shash_node_t *node, *tmp;
 	unsigned long int index;
-	shash_node_t *tmp, *new;
 
 	if (!ht || !key || !*key || !value)
 		return (0);
@@ -95,27 +95,30 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 			free(tmp->value);
 			tmp->value = strdup(value);
 			if (!tmp->value)
-			return (0);
-		return (1);
+				return (0);
+			return (1);
 		}
 	}
-	new = malloc(sizeof(shash_node_t));
-	if (!new)
+	node = malloc(sizeof(shash_node_t));
+	if (!node)
 		return (0);
-	new->key = strdup(key);
-	new->value = strdup(value);
-	new->next = ht->array[index];
-	ht->array[index] = new;
-	if (!new->key || !new->value)
+	node->key = strdup(key);
+	if (!node->key)
 	{
-		if (new->key)
-			free(new->key);
-		if (new->value)
-			free(new->value);
-		free(new);
+		free(node);
 		return (0);
 	}
-	return (continue_table_set(ht, new, key));
+	node->value = strdup(value);
+	if (!node->value)
+	{
+		free(node->key);
+		free(node);
+		return (0);
+	}
+	node->next = ht->array[index];
+	ht->array[index] = node;
+	set_sort(ht, node, key);
+	return (1);
 }
 
 /**
@@ -135,14 +138,11 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	index = key_index((const unsigned char *)key, ht->size);
 	if (index >= ht->size)
 		return (NULL);
-	tmp = ht->shead;
-	while (tmp)
-	{
-		if (strcmp(tmp->key, key) == 0)
-			return (tmp->value);
-		tmp = tmp->snext;
-	}
-	return (NULL);
+	for (tmp = ht->shead; tmp && strcmp(tmp->key, key); tmp = tmp->snext)
+		;
+	if (!tmp)
+		return (NULL);
+	return (tmp->value);
 }
 
 /**
