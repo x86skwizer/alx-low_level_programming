@@ -213,8 +213,8 @@ void shash_table_delete(shash_table_t *ht)
 	while (current != NULL)
 	{
 		tmp = current->snext;
-		free(current->key);
-		free(current->value);
+		free(tmp->key);
+		free(tmp->value);
 		free(current);
 		current = tmp;
 	}
